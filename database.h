@@ -20,6 +20,7 @@
 class QSqlQuery;
 class DataBasePrivate;
 
+
 class DataBase
 {
     Q_DECLARE_PRIVATE(DataBase)

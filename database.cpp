@@ -30,7 +30,6 @@ const QString pwd("pwd");
 const QString db_file("filename");
 const QString cmd_file("sqlFiles");
 const QString port("port");
-
 const QString sql_obj_key("sql");
 }
 
