@@ -2,7 +2,9 @@
 
 # How to use
   1.import head and source into you application project.
+  
   or
+  
   2.new a dll project generate the library,import head and the library into you application project
 
 # Example
