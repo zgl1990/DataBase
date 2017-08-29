@@ -118,7 +118,8 @@ private:
 class DataBasePrivate {
 public:
     DataBasePrivate(const QString &filename);
-    void exec(const QString &sqlKey,const QVariantMap &params,DataBase::Callback callback);
+    ~DataBasePrivate();
+    void exec(const QString &sqlKey, DataBase::Callback callback, const QVariantMap &params);
 private:
     void connect();
     void load(const QString &filename);
@@ -139,10 +140,10 @@ DataBase &DataBase::instance()
     return self;
 }
 
-void DataBase::exec(const QString &sqlKey, const QVariantMap &params, Callback callback)
+void DataBase::exec(const QString &sqlKey, Callback callback, const QVariantMap &params)
 {
     Q_D(DataBase);
-    d->exec(sqlKey,params,callback);
+    d->exec(sqlKey,callback,params);
 }
 
 DataBase::DataBase() :
@@ -290,7 +291,15 @@ DataBasePrivate::DataBasePrivate(const QString &filename) :
     load(_cfg.sqlfile());
 }
 
-void DataBasePrivate::exec(const QString &sqlKey, const QVariantMap &params, DataBase::Callback callback)
+DataBasePrivate::~DataBasePrivate()
+{
+    if (_flag) {
+        _db.commit();
+        _db.close();
+    }
+}
+
+void DataBasePrivate::exec(const QString &sqlKey, DataBase::Callback callback, const QVariantMap &params)
 {
     QSqlQuery query(_db);
     query.prepare(value(sqlKey));

@@ -26,7 +26,7 @@ class DataBase
     using Callback = std::function<void (QSqlQuery *query)>;
 public:
     static DataBase &instance();
-    void exec(const QString &sqlKey,const QVariantMap &params,Callback callback);
+    void exec(const QString &sqlKey,Callback callback,const QVariantMap &params = QVariantMap());
 private:
     QScopedPointer<DataBasePrivate> d_ptr;
     DataBase();
