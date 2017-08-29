@@ -15,7 +15,7 @@
 	int main(int argc, char *argv[])
 	{
 		QCoreApplication a(argc, argv);
-		DataBase::instance().exec("create",QVariantMap(),[=](QSqlQuery *query){
+		DataBase::instance().exec("create",[=](QSqlQuery *query){
 		});
 		QVariantMap m;
 		m["id"] = rand();
@@ -23,9 +23,9 @@
 		m["firstname"] = "first";
 		m["address"] = "shangdinggongyuan";
 		m["city"] = "chongqing tongnan";
-		DataBase::instance().exec("insert",m,[=](QSqlQuery *query){
+		DataBase::instance().exec("insert",[=](QSqlQuery *query){
 			qDebug() << query->executedQuery() << query->lastError().text() << query->lastError().type();
-		});
+		}，m);
 	  
 		return a.exec();
   }
