@@ -21,8 +21,8 @@
 		m["id"] = rand();
 		m["lastname"] = "lst";
 		m["firstname"] = "first";
-		m["address"] = "shangdinggongyuan";
-		m["city"] = "chongqing tongnan";
+		m["address"] = "address";
+		m["city"] = "chongqing";
 		DataBase::instance().exec("insert",[=](QSqlQuery *query){
 			qDebug() << query->executedQuery() << query->lastError().text() << query->lastError().type();
 		}，m);
